@@ -32,11 +32,14 @@ public class GameStarter{
         appletFrame.setVisible(true); 
         appletFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
-        // Center Frame to the middle of screen on start
-        Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenStartX = screenDimension.width/2 - appletFrame.getSize().width/2;
-        int screenStartY = screenDimension.height/2 - appletFrame.getSize().height/2;
-        appletFrame.setLocation(screenStartX, screenStartY);
+        // Anchor the frame inside the browser display.
+        appletFrame.setLocation(0, 0);
+
+        // Desktop version (disabled for the responsive browser display):
+        // Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+        // int screenStartX = screenDimension.width/2 - appletFrame.getSize().width/2;
+        // int screenStartY = screenDimension.height/2 - appletFrame.getSize().height/2;
+        // appletFrame.setLocation(screenStartX, screenStartY);
         
         // Add title
         appletFrame.setTitle("Flappy Bird Enhanced");
