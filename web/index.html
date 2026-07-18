@@ -112,15 +112,11 @@
           const pageDirectory = new URL(".", window.location.href).pathname;
           const jarPath = `/app${pageDirectory}FlappyBird.jar`.replace(/\/{2,}/g, "/");
 
-          status.textContent = "Starting StrataBird…";
+          status.textContent = "Java is starting — the first load can take a minute or two…";
           cheerpjRunJar(jarPath).catch((error) => {
             console.error(error);
             status.textContent = "The game stopped unexpectedly. Refresh to try again.";
           });
-
-          window.setTimeout(() => {
-            status.textContent = "Ready — click inside the game to begin.";
-          }, 2500);
         } catch (error) {
           console.error(error);
           status.textContent = "Could not load the Java runtime. Refresh to try again.";
