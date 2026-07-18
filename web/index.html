@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111827" />
+    <title>StrataBird — Java Browser Demo</title>
+    <script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #080b12;
+        color: #f8fafc;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px 14px;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.18), transparent 34rem),
+          #080b12;
+      }
+
+      main {
+        width: min(100%, 680px);
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 8vw, 4rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+      }
+
+      .subtitle {
+        margin: 12px 0 20px;
+        color: #94a3b8;
+      }
+
+      .game-shell {
+        width: min(100%, 608px);
+        margin: 0 auto;
+        padding: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 22px;
+        background: rgba(15, 23, 42, 0.86);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+      }
+
+      #display {
+        width: 100%;
+        aspect-ratio: 9 / 8;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #020617;
+      }
+
+      #status {
+        min-height: 24px;
+        margin: 14px 4px 2px;
+        color: #bae6fd;
+        font-size: 0.92rem;
+      }
+
+      .help {
+        margin: 16px 0 0;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+
+      kbd {
+        padding: 2px 7px;
+        border: 1px solid #475569;
+        border-bottom-width: 3px;
+        border-radius: 6px;
+        background: #1e293b;
+        color: #fff;
+        font: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>StrataBird</h1>
+      <p class="subtitle">The original Java game, running directly in your browser.</p>
+
+      <section class="game-shell" aria-label="StrataBird game">
+        <div id="display"></div>
+        <p id="status" role="status">Loading the Java runtime…</p>
+      </section>
+
+      <p class="help">Click inside the game, then use <kbd>Space</kbd>, <kbd>W</kbd>, or the mouse.</p>
+    </main>
+
+    <script>
+      (async function startGame() {
+        const status = document.getElementById("status");
+        const display = document.getElementById("display");
+
+        try {
+          await cheerpjInit({ version: 8, status: "splash" });
+          cheerpjCreateDisplay(-1, -1, display);
+
+          const pageDirectory = new URL(".", window.location.href).pathname;
+          const jarPath = `/app${pageDirectory}FlappyBird.jar`.replace(/\/{2,}/g, "/");
+
+          status.textContent = "Starting StrataBird…";
+          cheerpjRunJar(jarPath).catch((error) => {
+            console.error(error);
+            status.textContent = "The game stopped unexpectedly. Refresh to try again.";
+          });
+
+          window.setTimeout(() => {
+            status.textContent = "Ready — click inside the game to begin.";
+          }, 2500);
+        } catch (error) {
+          console.error(error);
+          status.textContent = "Could not load the Java runtime. Refresh to try again.";
+        }
+      })();
+    </script>
+  </body>
+</html>
