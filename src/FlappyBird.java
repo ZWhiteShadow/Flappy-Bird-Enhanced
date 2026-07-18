@@ -130,23 +130,22 @@ public class FlappyBird extends GraphicsProgram {
 
 	private void handlePipeCollision(Bird player, int playerIndex) {
 		if (player.pipeCollision()) {
-			if (playerIndex == 1 && scoreGained == true) {
-				score1 = 0;
-				drawScore();
-				Music.playSound("Music/falling.wav");
-			}
+			// In two-player mode a collision reset only the colliding player's
+			// score and play continued for the other bird. Single-player mode
+			// must preserve the earned score and end the round immediately.
 			// TWO-PLAYER MODE (disabled):
+			// if (playerIndex == 1 && scoreGained == true) {
+			// 	score1 = 0;
+			// 	drawScore();
+			// 	Music.playSound("Music/falling.wav");
 			// } else if (playerIndex == 2 && scoreGained == true) {
 			// 	score2 = 0;
 			// 	drawScore();
 			// 	Music.playSound("Music/falling.wav");
 			// }
-			if (scoreGained == true && score1 == 0) {
-				// TWO-PLAYER MODE (disabled):
-				// if (scoreGained == true && score1 == 0 && score2 == 0) {
-				currentMode = 2;
-				endRound();
-			}
+			Music.playSound("Music/falling.wav");
+			currentMode = 2;
+			endRound();
 			player.downwardSpeed = Math.min(0, player.downwardSpeed);
 		}
 	}
