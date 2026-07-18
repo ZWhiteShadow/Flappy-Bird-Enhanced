@@ -74,11 +74,13 @@ public class Bird extends FlappyBird {
 			Data.player1Down.setSize(birdWidth, birdHeight);
 			Data.player1Flat.setSize(birdWidth, birdHeight);
 			Data.player1Up.setSize(birdWidth, birdHeight);
-		} else if (player == 2) {
-			Data.player2Down.setSize(birdWidth, birdHeight);
-			Data.player2Flat.setSize(birdWidth, birdHeight);
-			Data.player2Up.setSize(birdWidth, birdHeight);
 		}
+		// TWO-PLAYER MODE (disabled):
+		// } else if (player == 2) {
+		// 	Data.player2Down.setSize(birdWidth, birdHeight);
+		// 	Data.player2Flat.setSize(birdWidth, birdHeight);
+		// 	Data.player2Up.setSize(birdWidth, birdHeight);
+		// }
 
 		return birdHeight;
 	}
@@ -94,14 +96,15 @@ public class Bird extends FlappyBird {
 			Data.player1Up.setLocation(FlappyBird.BIRD1_X_START, this.getY());
 			birdSize(1);
 			updateBirdRect(1);
-		} else if (player == 2) {
-			// Resets the location for player 2 bird images
-			Data.player2Down.setLocation(FlappyBird.BIRD2_X_START, this.getY());
-			Data.player2Flat.setLocation(FlappyBird.BIRD2_X_START, this.getY());
-			Data.player2Up.setLocation(FlappyBird.BIRD2_X_START, this.getY());
-			birdSize(2);
-			updateBirdRect(2);
 		}
+		// TWO-PLAYER MODE (disabled):
+		// } else if (player == 2) {
+		// 	Data.player2Down.setLocation(FlappyBird.BIRD2_X_START, this.getY());
+		// 	Data.player2Flat.setLocation(FlappyBird.BIRD2_X_START, this.getY());
+		// 	Data.player2Up.setLocation(FlappyBird.BIRD2_X_START, this.getY());
+		// 	birdSize(2);
+		// 	updateBirdRect(2);
+		// }
 
 		if (FlappyBird.currentMode != 2) {
 
@@ -175,44 +178,45 @@ public class Bird extends FlappyBird {
 				// Day
 				window.add(Data.player1Flat);
 				window.remove(Data.player1Up);
-				window.remove(Data.player2Down);
+				// TWO-PLAYER MODE (disabled): window.remove(Data.player2Down);
 				// Night
-				window.add(Data.player2Flat);
-				window.remove(Data.player2Up);
-				window.remove(Data.player2Down);
+				// window.add(Data.player2Flat);
+				// window.remove(Data.player2Up);
+				// window.remove(Data.player2Down);
 			} else if (index == 1) {
 				// Day
 				window.add(Data.player1Down);
 				window.remove(Data.player1Flat);
 				// Night
-				window.add(Data.player2Down);
-				window.remove(Data.player2Flat);
+				// window.add(Data.player2Down);
+				// window.remove(Data.player2Flat);
 
 			} else if (index == 2) {
 				// Day
 				window.add(Data.player1Flat);
 				window.remove(Data.player1Down);
 				// Night
-				window.add(Data.player2Flat);
-				window.remove(Data.player2Down);
+				// window.add(Data.player2Flat);
+				// window.remove(Data.player2Down);
 			} else {
 				// Day
 				window.add(Data.player1Up);
 				window.remove(Data.player1Flat);
 				window.remove(Data.player1Down);
 				// Night
-				window.add(Data.player2Up);
-				window.remove(Data.player2Flat);
-				window.remove(Data.player2Down);
+				// window.add(Data.player2Up);
+				// window.remove(Data.player2Flat);
+				// window.remove(Data.player2Down);
 			}
 			// remove all bird images
 		} else {
 			remove(Data.player1Up);
 			remove(Data.player1Down);
 			remove(Data.player1Flat);
-			remove(Data.player2Up);
-			remove(Data.player2Down);
-			remove(Data.player2Flat);
+			// TWO-PLAYER MODE (disabled):
+			// remove(Data.player2Up);
+			// remove(Data.player2Down);
+			// remove(Data.player2Flat);
 		}
 	}
 
