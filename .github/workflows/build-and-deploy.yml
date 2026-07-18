@@ -39,7 +39,7 @@ jobs:
       - name: Upload rebuilt game
         uses: actions/upload-artifact@v4
         with:
-          name: stratabird-site
+          name: flappy-bird-enhanced-site
           path: site
           retention-days: 30
 
@@ -53,7 +53,7 @@ jobs:
       - name: Download rebuilt game
         uses: actions/download-artifact@v4
         with:
-          name: stratabird-site
+          name: flappy-bird-enhanced-site
           path: site
 
       - name: Configure GitHub Pages
