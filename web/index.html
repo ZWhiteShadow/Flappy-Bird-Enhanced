@@ -77,6 +77,30 @@
         font-size: 0.92rem;
       }
 
+      .game-controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      #reset-game {
+        padding: 9px 16px;
+        border: 1px solid #38bdf8;
+        border-radius: 9px;
+        background: #0c4a6e;
+        color: #f8fafc;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      #reset-game:hover,
+      #reset-game:focus-visible {
+        background: #075985;
+        outline: 2px solid #7dd3fc;
+        outline-offset: 2px;
+      }
+
       .help {
         margin: 16px 0 0;
         color: #94a3b8;
@@ -104,6 +128,9 @@
           <div id="display"></div>
         </div>
         <p id="status" role="status">Loading the Java runtime…</p>
+        <div class="game-controls">
+          <button id="reset-game" type="button">Reset Game</button>
+        </div>
       </section>
 
       <p class="help">Click or tap inside the game. You can also use <kbd>Space</kbd> or <kbd>W</kbd>.</p>
@@ -114,8 +141,15 @@
         const status = document.getElementById("status");
         const display = document.getElementById("display");
         const viewport = document.getElementById("game-viewport");
+        const resetButton = document.getElementById("reset-game");
         const gameWidth = 576;
         const gameHeight = 512;
+
+        resetButton.addEventListener("click", () => {
+          resetButton.disabled = true;
+          status.textContent = "Resetting the game…";
+          window.location.reload();
+        });
 
         function resizeGame() {
           const availableWidth = viewport.parentElement.clientWidth;
